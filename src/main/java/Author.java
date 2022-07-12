@@ -1,15 +1,15 @@
 import java.io.Serializable;
 
-public class Authors implements Serializable {
+public class Author implements Serializable {
 
     private long id;
     private String first_name;
     private String last_name;
 
-    public Authors() {
+    public Author() {
     }
 
-    public Authors(long id, String first_name, String last_name) {
+    public Author(long id, String first_name, String last_name) {
         this.id = id;
         this.first_name = first_name;
         this.last_name = last_name;

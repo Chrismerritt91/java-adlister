@@ -4,12 +4,12 @@ public class Quotes implements Serializable {
 
     private long id;
     private String content;
-    private String author;
+    private Author author;
 
     public Quotes() {
     }
 
-    public Quotes(long id, String content, String author) {
+    public Quotes(long id, String content, Author author) {
         this.id = id;
         this.content = content;
         this.author = author;
@@ -31,11 +31,11 @@ public class Quotes implements Serializable {
         this.content = content;
     }
 
-    public String getAuthor() {
+    public Author getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(Author author) {
         this.author = author;
     }
 }

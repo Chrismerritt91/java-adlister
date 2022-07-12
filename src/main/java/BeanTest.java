@@ -3,11 +3,11 @@ import java.util.ArrayList;
 public class BeanTest {
 
     public static void main(String[] args) {
-        Authors jackCarr = new Authors();
-        Authors tomClancy = new Authors();
+        Author jackCarr = new Author(1,"Jack","Carr");
+        Author tomClancy = new Author(2, "Tom", "Clancy");
 
-        Quotes hemingway = new Quotes(3,"content", "Ernest");
-        Quotes twain = new Quotes(4, "content 2", "Mark");
+        Quotes hemingway = new Quotes(1,"content", jackCarr);
+        Quotes twain = new Quotes(2, "content 2", tomClancy);
 
         Albums theWall = new Albums();
         Albums killerQueen = new Albums();
@@ -17,7 +17,7 @@ public class BeanTest {
         quotes.add(twain);
 
         for (Quotes quote: quotes) {
-            System.out.println(quote.getAuthor() + " " + quote.getContent());
+            System.out.println(quote.getAuthor().getFirst_name() + " " + quote.getAuthor().getLast_name() + " " + quote.getContent());
         }
 
     }
