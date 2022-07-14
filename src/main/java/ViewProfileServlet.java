@@ -10,7 +10,7 @@ public class ViewProfileServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String user = (String) request.getSession().getAttribute("user");
         String password = (String) request.getSession().getAttribute("password");
-        request.setAttribute("name", user);
+        request.setAttribute("user", user);
 
         if(user != null && password != null){
             request.getRequestDispatcher("WEB-INF/profile.jsp").forward(request, response);
@@ -19,13 +19,4 @@ public class ViewProfileServlet extends HttpServlet {
         }
     }
 
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String logout = req.getParameter("logout");
-        if(logout.equals("yes")){
-            resp.sendRedirect("/logout");
-        } else{
-            resp.sendRedirect("/profile");
-        }
-    }
 }
