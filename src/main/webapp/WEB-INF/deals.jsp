@@ -20,7 +20,8 @@
     </c:if>
     <c:choose>
     <c:when test="${not empty favorite}">
-    &nbsp; We have some awesome deals on ${favorite} cookies!</h2>
+    &nbsp;We have some awesome deals on ${favorite} cookies!</h2>
+<%--&nbsp nonbreaking space, used to add another space/ used to force a blank space where spaces dont work--%>
 </c:when>
 <c:otherwise>
     </h2>
