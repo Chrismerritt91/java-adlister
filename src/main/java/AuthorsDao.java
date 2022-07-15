@@ -24,8 +24,10 @@ public class AuthorsDao implements Authors{
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery("SELECT  * FROM authors");
             while(rs.next()){
-                Author author = new Author(rs.getLong("id"), rs.getString("authors"));
+                Author author = new Author(rs.getLong("id"), rs.getString("author_name"));
+                authors.add(author);
             }
+
         }catch(SQLException sqle){
             throw new RuntimeException("Error connecting to db", sqle);
         }
