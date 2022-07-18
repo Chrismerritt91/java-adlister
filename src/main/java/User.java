@@ -17,6 +17,10 @@ public class User implements Serializable {
         this.email = email;
     }
 
+    public User(long id) {
+        this.id = id;
+    }
+
     public long getId() {
         return id;
     }

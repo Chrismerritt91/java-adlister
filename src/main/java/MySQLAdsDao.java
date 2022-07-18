@@ -32,26 +32,28 @@ public class MySQLAdsDao implements Ads{
                         );
                 ads.add(ad);
             }
-        }catch(SQLException sqle){
-            throw new RuntimeException("Error connecting to db", sqle);
+        }catch(SQLException e){
+            e.printStackTrace();
         }
 
         return ads;
     }
 
+
+
     @Override
-    public Long insert(Ad ad) {
-        String author_name = author.getAuthor_name();
-        String query = "INSERT INTO authors (author_name) VALUES ('" + author_name + "')";
+    public long insert(Ad ad) {
+        String query = "INSERT INTO ad (user_id, title, description) VALUE (" + ad.getUser_id() + ",'" + ad.getTitle() + "','" + ad.getDescription() + "')";
         try{
             Statement statement = connection.createStatement();
             statement.executeUpdate(query, Statement.RETURN_GENERATED_KEYS);
             ResultSet rs = statement.getGeneratedKeys();
             rs.next();
-            long key = rs.getLong(1);
-            System.out.println("they key to the new insert is:" + key);
-        }catch(SQLException sqle){
-            throw new RuntimeException("Error connecting to db", sqle);
+            return rs.getLong(1);
+        }catch(SQLException e){
+            throw new RuntimeException(e);
         }
+
     }
+
 }

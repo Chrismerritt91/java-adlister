@@ -20,7 +20,9 @@ public class QuotesDao implements Quotes{
     public QuotesDao(Config config){
         try{
             DriverManager.registerDriver(new Driver());
-            connection = DriverManager.getConnection(config.getUrl(), config.getUser(), config.getPassword());
+            connection = DriverManager.getConnection(config.getUrl(),
+                    config.getUser(),
+                    config.getPassword());
         }catch(SQLException sqle){
             throw new RuntimeException("Error connecting to db", sqle);
         }

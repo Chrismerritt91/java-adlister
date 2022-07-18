@@ -2,6 +2,6 @@ import java.util.List;
 
 public interface Users {
     List<User> all();
-
-    Long insert(User user);
+    User getUserById(long id);
+    void insert(User user);
 }

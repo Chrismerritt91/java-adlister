@@ -47,17 +47,17 @@ public class UsersDao implements Users{
         User user = null;
         try{
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM authors WHERE id = '" + id + "'");
+            ResultSet rs = statement.executeQuery("SELECT * FROM user WHERE id = '" + id + "'");
             rs.next();
-            user = new User(rs.getLong("id"), rs.getString("user_id"));
-        }catch(SQLException sqle){
-            throw new RuntimeException("Error connecting to db", sqle);
+            user = new User(rs.getLong("id"),rs.getString("first_name"), rs.getString("last_name"), rs.getString("password"), rs.getString("email"));
+        }catch(SQLException e){
+            e.printStackTrace();
         }
         return user;
     }
 
     @Override
-    public Long insert(User user) {
-        return null;
+    public void insert(User user) {
+
     }
 }
