@@ -2,7 +2,7 @@
   Created by IntelliJ IDEA.
   User: chrismerritt
   Date: 7/15/22
-  Time: 12:13 PM
+  Time: 2:09 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -10,19 +10,15 @@
 <html>
 <head>
     <jsp:include page="/WEB-INF/partials/head.jsp">
-        <jsp:param name="title" value="Authors"/>
+      <jsp:param name="title" value="Quotes"/>
     </jsp:include>
 </head>
 <body>
-<h2>Add an author to the database:</h2>
-<form action="authors" method="post">
-    <label for="author_name">Author Name:</label>
-    <input type="text" name="author_name" id="author_name">
-    <input type="submit" value="Submit">
-</form>
 <jsp:include page="/WEB-INF/partials/navbar.jsp"/>
-<c:forEach var="authors" items="${authors}">
-    <p>${authors.author_name}</p>
+<c:forEach var="quote" items="${quotes}">
+  <div>
+    <p>${quote.author.author_name} said: ${quote.content}</p>
+  </div>
 </c:forEach>
 </body>
 </html>

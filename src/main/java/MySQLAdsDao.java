@@ -4,20 +4,10 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AuthorsDao implements Authors{
+public class MySQLAdsDao implements Ads{
     private Connection connection;
 
-//    public AuthorsDao() {
-//        try{
-//            DriverManager.registerDriver(new Driver());
-//            Config config = new Config();
-//            connection = DriverManager.getConnection(config.getUrl(), config.getUser(), config.getPassword());
-//        }catch(SQLException sqle){
-//            throw new RuntimeException("Error connecting to db", sqle);
-//        }
-//    }
-
-    public AuthorsDao(Config config){
+    public MySQLAdsDao(Config config) {
         try{
             DriverManager.registerDriver(new Driver());
             connection = DriverManager.getConnection(config.getUrl(),
@@ -29,40 +19,28 @@ public class AuthorsDao implements Authors{
     }
 
     @Override
-    public List<Author> all() {
-        List<Author> authors = new ArrayList<>();
+    public List<Ad> all() {
+        List<Ad> ads = new ArrayList<>();
         try{
             Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT  * FROM authors");
+            ResultSet rs = statement.executeQuery("SELECT  * FROM ad");
             while(rs.next()){
-                Author author = new Author(rs.getLong("id"),
-                        rs.getString("author_name"));
-                authors.add(author);
+                Ad ad = new Ad(rs.getLong("id"),
+                        rs.getLong("user_id"),
+                        rs.getString("title"),
+                        rs.getString("description")
+                        );
+                ads.add(ad);
             }
-
         }catch(SQLException sqle){
             throw new RuntimeException("Error connecting to db", sqle);
         }
 
-        return authors;
+        return ads;
     }
 
     @Override
-    public Author getAuthorById(long id){
-        Author author = null;
-        try{
-            Statement statement = connection.createStatement();
-            ResultSet rs = statement.executeQuery("SELECT * FROM authors WHERE id = '" + id + "'");
-            rs.next();
-            author = new Author(rs.getLong("id"), rs.getString("author_name"));
-        }catch(SQLException sqle){
-            throw new RuntimeException("Error connecting to db", sqle);
-        }
-        return author;
-    }
-
-    @Override
-    public void insert(Author author) {
+    public Long insert(Ad ad) {
         String author_name = author.getAuthor_name();
         String query = "INSERT INTO authors (author_name) VALUES ('" + author_name + "')";
         try{

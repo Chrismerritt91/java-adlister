@@ -8,7 +8,7 @@ import java.util.List;
 public class AuthorsServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Authors authorsDao = new AuthorsDao();
+        Authors authorsDao = DaoFactory.getAuthorsDao();
         List<Author> authors = authorsDao.all();
         request.setAttribute("authors", authors);
         request.getRequestDispatcher("/WEB-INF/Authors.jsp").forward(request,response);
@@ -17,6 +17,9 @@ public class AuthorsServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        String author_name = request.getParameter("author_name");
+        Authors authorsDao = DaoFactory.getAuthorsDao();
+        authorsDao.insert(new Author(0, author_name));
+        response.sendRedirect("/authors");
     }
 }
